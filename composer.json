@@ -9,12 +9,10 @@
     ],
     "type": "yii2-extension",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Timur Melnikov",
-            "email": "melnilovt@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "Timur Melnikov",
+        "email": "melnilovt@gmail.com"
+    }],
     "require": {
         "yiisoft/yii2": "*",
         "bower-asset/gasparesganga-jquery-loading-overlay": "1.5.*"
