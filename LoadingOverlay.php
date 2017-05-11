@@ -13,13 +13,15 @@ use yii\base\Widget;
 /**
  * @author Timur Melnikov <melnilovt@gmail.com>
  */
-class LoadingOverlay extends Widget {
+class LoadingOverlay extends Widget
+{
 
     public $loadingType = 1;
 
-    public function init() {
+    public function init()
+    {
 
         $view = $this->getView();
         $bundle = LoadingOverlayAsset::register($view);
-
+    }
 }
