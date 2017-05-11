@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://github.com/timurmelnikov/yii2-loading-overlay
  * @copyright Copyright (c) 2017 Timur Melnikov
@@ -14,9 +15,7 @@ use yii\web\AssetBundle;
  */
 class LoadingOverlayAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/timurmelnikov/yii2-showloading/assets';
-
-
+    public $sourcePath = '@vendor/bower/gasparesganga-jquery-loading-overlay';
     public $depends = [
         'yii\web\JqueryAsset',
     ];
@@ -24,6 +23,6 @@ class LoadingOverlayAsset extends AssetBundle
     public function init()
     {
         parent::init();
-        $this->js[] = YII_DEBUG ? 'js/jquery.showLoading.js' : 'js/jquery.showLoading.min.js';
+        $this->js[] = YII_DEBUG ? 'src/loadingoverlay.js' : 'src/loadingoverlay.min.js';
     }
 }
