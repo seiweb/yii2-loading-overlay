@@ -20,6 +20,6 @@ class LoadingOverlay extends Widget {
     public function init() {
 
         $view = $this->getView();
-        $bundle = ShowLoadingAsset::register($view);
+        $bundle = LoadingOverlayAsset::register($view);
 
 }
