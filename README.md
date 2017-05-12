@@ -17,3 +17,16 @@ Yii2 расширение для подключения плагина jQuery Lo
     }
 }
 ```
+После редактирования файла выполнить команду `composer update`
+
+## Использование
+В представлении, где будет использоваться yii2-loading-overlay, подключить:
+``` php
+use timurmelnikov\widgets\LoadingOverlay;
+```
+Вывести виджет:
+``` php
+echo LoadingOverlay::widget([
+    //Параметры...
+]);
+```
