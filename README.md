@@ -1,6 +1,6 @@
 yii2-loading-overlay
 ================
-Yii2 расширение для подключения плагина jQuery LoadingOverlay  
+Yii2 расширение-обертка для подключения плагина jQuery LoadingOverlay  
 Расширение предназначено для наложения картинки Ajax загрузки на блок, при обработке Ajax запроса.
 
 # Плагин, еще не готов!!!
@@ -16,17 +16,4 @@ Yii2 расширение для подключения плагина jQuery Lo
         "timurmelnikov/yii2-loading-overlay": "dev-master"
     }
 }
-```
-После редактирования файла выполнить команду `composer update`
-
-## Использование
-В представлении, где будет использоваться yii2-loading-overlay, подключить:
-``` php
-use timurmelnikov\widgets\LoadingOverlay;
-```
-Вывести виджет:
-``` php
-echo LoadingOverlay::widget([
-    //Параметры...
-]);
 ```
