@@ -19,11 +19,15 @@ Yii2 расширение-обертка для подключения плаг�
 ```
 
 ## Использование
-В представлении, где будет использоваться yii2-showloading, подключить:
+В представлении, где будет использоваться yii2-loading-overlay, подключить:
 ``` php
-use timurmelnikov\widgets\ShowLoading;
+use timurmelnikov\widgets\LoadingOverlay;
 ```
 Вывести виджет:
 ``` php
-echo ShowLoading::widget(['loadingType' => 1]);
+echo LoadingOverlay::widget([
+    'elementOverlay'=> '#p0',
+    'color'=>'rgba(255, 55, 255, 0.8)',
+    //'image'=>'http://192.168.19.83/yii2-extenation/web/img/IMG_20170513_105214.jpg'
+    ]);
 ```
