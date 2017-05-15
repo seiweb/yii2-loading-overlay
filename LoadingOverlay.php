@@ -24,9 +24,9 @@ class LoadingOverlay extends Widget
     public $imagePosition = 'center center';//             (String)
     public $maxSize;        //"100px"                     (Integer/String)
     public $minSize;        //"20px"                      (Integer/String)
-    public $resizeInterval; //50                          (Integer)
+    public $resizeInterval = 0; //50                          (Integer)
     public $size;           //"50%"                       (Integer/String)
-    public $zIndex;         //9999                        (Integer)
+    public $zIndex         = 9999; //                        (Integer)
 
     public $elementOverlay;
     
@@ -52,9 +52,9 @@ class LoadingOverlay extends Widget
          imagePosition   : "{$this->imagePosition}",
          maxSize         : "80px",
          minSize         : "20px",
-         resizeInterval  : 0,
-         size            : "50%"
-         //zIndex
+         resizeInterval  : {$this->resizeInterval},
+         size            : "50%",
+         zIndex          : {$this->zIndex}
          });
 JS;
         Yii::$app->view->registerJs($script);
