@@ -17,7 +17,7 @@ class LoadingOverlay extends Widget
 {
     public $color          = 'rgba(255, 255, 255, 0.8)';  // String
     public $custom         = '';                          // (String/DOM Element/jQuery Object)
-    public $fade;                                         // (Boolean/Integer/String/Array)
+    public $fade           = [];                          // (Array)
     public $fontawesome    = '';                          // (String)
     public $image          = '';                          // (String)
     public $imagePosition  = 'center center';             // (String)
@@ -32,6 +32,7 @@ class LoadingOverlay extends Widget
     {
         $bundle = LoadingOverlayAsset::register($this->getView());
         if ($this->image == '') $this->image = $bundle->baseUrl.'/src/loading.gif';
+        $this->fade =  json_encode($this->fade);
         $this->setDefaults();
         $this->registerLoader();
     }
@@ -45,7 +46,7 @@ class LoadingOverlay extends Widget
          $.LoadingOverlaySetup({
          color           : "{$this->color}",
          custom          : "{$this->custom}",
-         //fade          :  [5000, 2000],
+         fade            :  {$this->fade},
          fontawesome     : "{$this->fontawesome}",
          image           : "{$this->image}",
          imagePosition   : "{$this->imagePosition}",
