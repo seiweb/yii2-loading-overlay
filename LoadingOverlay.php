@@ -31,7 +31,7 @@ class LoadingOverlay extends Widget
     public function init()
     {
         $bundle = LoadingOverlayAsset::register($this->getView());
-        $this->image = $bundle->baseUrl.'/src/loading.gif'; //Это, пока не совсем работоспособно...
+        if ($this->image == '') $this->image = $bundle->baseUrl.'/src/loading.gif';
         $this->setDefaults();
         $this->registerLoader();
     }
@@ -45,7 +45,7 @@ class LoadingOverlay extends Widget
          $.LoadingOverlaySetup({
          color           : "{$this->color}",
          custom          : "{$this->custom}",
-         //fade          : [5000, 2000],
+         //fade          :  [5000, 2000],
          fontawesome     : "{$this->fontawesome}",
          image           : "{$this->image}",
          imagePosition   : "{$this->imagePosition}",
