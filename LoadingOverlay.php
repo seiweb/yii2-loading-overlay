@@ -71,13 +71,11 @@ class LoadingOverlay extends Widget
     public $zIndex = 9999;
     /**
     * @var string
+    * Он-же Идентификатор экземпляра...
     */
-    public $elementOverlay;
+    public $elementOverlay; //Нужна доработка...
 
-    /*
-    * Идентификатор экземпляра
-    */
-    public $key = null; //Нужна доработка...
+
   
 
     public function init()
@@ -87,6 +85,9 @@ class LoadingOverlay extends Widget
             $this->image = $bundle->baseUrl.'/src/loading.gif';
         }
         $this->fade =  json_encode($this->fade);
+
+
+
         $this->setDefaults();
         $this->registerLoader();
     }
@@ -132,7 +133,7 @@ JS;
 
 
 // Перехват Pjax...
-//         $script = <<< JS
+//        $script = <<< JS
 // var elementOverlay = "{$this->elementOverlay}";        
 // $(document).on('pjax:send', function() {
 //     if (elementOverlay != "") {
@@ -149,6 +150,6 @@ JS;
 //     }
 // })
 // JS;
-        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->key);
+        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->elementOverlay);
     }
 }
