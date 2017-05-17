@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2017 Timur Melnikov
  * @license MIT
  */
-
 namespace timurmelnikov\widgets;
 
 use Yii;
@@ -15,23 +14,78 @@ use yii\base\Widget;
  */
 class LoadingOverlay extends Widget
 {
-    public $color          = 'rgba(255, 255, 255, 0.8)';  // String
-    public $custom         = '';                          // (String/DOM Element/jQuery Object)
-    public $fade           = [];                          // (Array)
-    public $fontawesome    = '';                          // (String)
-    public $image          = '';                          // (String)
-    public $imagePosition  = 'center center';             // (String)
-    public $maxSize        = '80px';                      // (Integer/String)
-    public $minSize        = '20px';                      // (Integer/String)
-    public $resizeInterval = 0;                           // (Integer)
-    public $size           = '50%';                       // (Integer/String)
-    public $zIndex         = 9999;                        // (Integer)
+    /**
+    * @var string CSS background-color property. Use rgba() to set the opacity
+    * String
+    */
+    public $color = 'rgba(255, 255, 255, 0.8)';
+    /**
+    * @var string A DOM element, jQuery object or plain HTML to append to the LoadingOverlay
+    * String/DOM Element/jQuery Object
+    */
+    public $custom = '';
+    /**
+    * @var array Controls the fade in and fade out durations
+    * Boolean/Integer/String/Array
+    */
+    public $fade = [];
+    /**
+    * @var string Class(es) of the Font Awesome icon to use
+    * String
+    */
+    public $fontawesome = '';
+    /**
+    * @var string URL of the image to show
+    * String
+    */
+    public $image = '';
+    /**
+    * @var string This option is mapped directly to CSS background-position property to customize the position of the image
+    * String
+    */
+    public $imagePosition = 'center center';
+    /**
+    * @var string Maximun size of image in pixels
+    * Integer/String
+    */
+    public $maxSize = '80px';
+    /**
+    * @var string Minimun size of image in pixels
+    * Integer/String
+    */
+    public $minSize = '20px';
+    /**
+    * @var integer Specifies an interval in milliseconds to resize and reposition the LoadingOverlay according to its container
+    * Integer
+    */
+    public $resizeInterval = 0;
+    /**
+    * @var string Size of image in percentage
+    * Integer/String
+    */
+    public $size = '50%';
+    /**
+    * @var integer Use this to explicitly set a z-index for the overlay
+    * Integer
+    */
+    public $zIndex = 9999;
+    /**
+    * @var string
+    */
     public $elementOverlay;
+
+    /*
+    * Идентификатор экземпляра
+    */
+    public $key = null; //Нужна доработка...
   
+
     public function init()
     {
         $bundle = LoadingOverlayAsset::register($this->getView());
-        if ($this->image == '') $this->image = $bundle->baseUrl.'/src/loading.gif';
+        if ($this->image == '') {
+            $this->image = $bundle->baseUrl.'/src/loading.gif';
+        }
         $this->fade =  json_encode($this->fade);
         $this->setDefaults();
         $this->registerLoader();
@@ -40,7 +94,7 @@ class LoadingOverlay extends Widget
 /**
  * Метод сборки скрипта установки начальных настроек лоадера и регистрация его в представлении
  */
-    private function setDefaults()
+    private function setDefaults() //Нужна доработка...
     {
         $script = <<<JS
          $.LoadingOverlaySetup({
@@ -63,40 +117,38 @@ JS;
 /**
  * Метод регистрации скрипта лоадера в представлении
  */
-    private function registerLoader()
+    private function registerLoader() //Нужна доработка...
     {
-//По селектору...
-//         $script = <<<JS
-// $("#test").click(function() {
-//   $("#ttt").LoadingOverlay("show");
 
-// // Here we might call the "hide" action 2 times, or simply set the "force" parameter to true:
-// $("#ttt").LoadingOverlay("hide", true);
-// });
-// JS;
-
-
-//Pjax...
-        $script = <<< JS
-var elementOverlay = "{$this->elementOverlay}";        
-
-$(document).on('pjax:send', function() {
-
-    if (elementOverlay != "") {
-        $("{$this->elementOverlay}").LoadingOverlay("show"); //На элемент
-    } else {
-        $.LoadingOverlay("show"); //На всю страницу
-    }
-
-})
-$(document).on('pjax:complete', function() {
-    if (elementOverlay != "") {
-        $("{$this->elementOverlay}").LoadingOverlay("hide", true); //На элемент
-    } else {
-        $.LoadingOverlay("hide"); //На всю страницу
-    }
-})
+//Перехват любого AJAX запроса...
+        $script = <<<JS
+$(document).ajaxSend(function(event, jqxhr, settings){
+    $("{$this->elementOverlay}").LoadingOverlay("show");
+});
+$(document).ajaxComplete(function(event, jqxhr, settings){
+    $("{$this->elementOverlay}").LoadingOverlay("hide");
+});
 JS;
-        Yii::$app->view->registerJs($script);
+
+
+// Перехват Pjax...
+//         $script = <<< JS
+// var elementOverlay = "{$this->elementOverlay}";        
+// $(document).on('pjax:send', function() {
+//     if (elementOverlay != "") {
+//         $("{$this->elementOverlay}").LoadingOverlay("show"); //На элемент
+//     } else {
+//         $.LoadingOverlay("show"); //На всю страницу
+//     }
+// })
+// $(document).on('pjax:complete', function() {
+//     if (elementOverlay != "") {
+//         $("{$this->elementOverlay}").LoadingOverlay("hide", true); //На элемент
+//     } else {
+//         $.LoadingOverlay("hide"); //На всю страницу
+//     }
+// })
+// JS;
+        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->key);
     }
 }

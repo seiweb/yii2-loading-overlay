@@ -1,11 +1,12 @@
 {
     "name": "timurmelnikov/yii2-loading-overlay",
-    "description": "Yii2 расширение для подключения плагина jQuery LoadingOverlay",
+    "description": "Yii2 расширение-обертка для подключения плагина jQuery LoadingOverlay",
     "keywords": [
         "yii2",
         "ajax",
         "widget",
-        "jQuery"
+        "jQuery",
+		"LoadingOverlay"
     ],
     "type": "yii2-extension",
     "license": "MIT",
