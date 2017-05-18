@@ -75,12 +75,6 @@ class LoadingOverlay extends Widget
     */
     public $elementOverlay; //Нужна доработка...
 
-
-    public $test; //Удалить...
-
-
-  
-
     public function init()
     {
         $bundle = LoadingOverlayAsset::register($this->getView());
@@ -89,7 +83,9 @@ class LoadingOverlay extends Widget
         $this->fade =  json_encode($this->fade);
 
 //Вот так, буду обрабатывать "разнотипные" переменные
-if (gettype($this->test) == 'string' ) $this->test = '"'.$this->test.'"'; //Удалить...
+        if (gettype($this->maxSize) == 'string' ) $this->maxSize = '"'.$this->maxSize.'"';
+        if (gettype($this->minSize) == 'string' ) $this->minSize = '"'.$this->minSize.'"';
+        if (gettype($this->size) == 'string' ) $this->size = '"'.$this->size.'"';
 
 
 
@@ -103,22 +99,19 @@ if (gettype($this->test) == 'string' ) $this->test = '"'.$this->test.'"'; //Уд
     private function setDefaults() //Нужна доработка...
     {
         $script = <<<JS
-         $.LoadingOverlaySetup({
-         color           : "{$this->color}",
-         custom          : "{$this->custom}",
-         fade            :  {$this->fade},
-         fontawesome     : "{$this->fontawesome}",
-         image           : "{$this->image}",
-         imagePosition   : "{$this->imagePosition}",
-         maxSize         : "{$this->maxSize}",
-         minSize         : "{$this->minSize}",
-         resizeInterval  :  {$this->resizeInterval},
-         size            : "{$this->size}",
-         zIndex          :  {$this->zIndex}
-         });
-
-         //alert(typeof {$this->test}); //Удалить...
-
+  $.LoadingOverlaySetup({
+     color           : "{$this->color}",
+     custom          : "{$this->custom}",
+     fade            :  {$this->fade},
+     fontawesome     : "{$this->fontawesome}",
+     image           : "{$this->image}",
+     imagePosition   : "{$this->imagePosition}",
+     maxSize         :  {$this->maxSize},
+     minSize         :  {$this->minSize},
+     resizeInterval  :  {$this->resizeInterval},
+     size            :  {$this->size},
+     zIndex          :  {$this->zIndex}
+  });
 JS;
         Yii::$app->view->registerJs($script);
     }
