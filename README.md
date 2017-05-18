@@ -31,3 +31,5 @@ echo LoadingOverlay::widget([
     //'image'=>'http://192.168.19.83/yii2-extenation/web/img/IMG_20170513_105214.jpg'
     ]);
 ```
+
+Свойство "fontawesome" работает, если к проекту подключен Font Awesome. Например - https://github.com/rmrevin/yii2-fontawesome

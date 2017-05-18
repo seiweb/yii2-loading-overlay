@@ -16,12 +16,12 @@ class LoadingOverlay extends Widget
 {
     /**
     * @var string CSS background-color property. Use rgba() to set the opacity
-    * String
+    * + String
     */
     public $color = 'rgba(255, 255, 255, 0.8)';
     /**
     * @var string A DOM element, jQuery object or plain HTML to append to the LoadingOverlay
-    * String/DOM Element/jQuery Object
+    * + String/DOM Element/jQuery Object
     */
     public $custom = '';
     /**
@@ -31,17 +31,17 @@ class LoadingOverlay extends Widget
     public $fade = [];
     /**
     * @var string Class(es) of the Font Awesome icon to use
-    * String
+    * + String
     */
     public $fontawesome = '';
     /**
     * @var string URL of the image to show
-    * String
+    * + String
     */
     public $image = '';
     /**
     * @var string This option is mapped directly to CSS background-position property to customize the position of the image
-    * String
+    * + String
     */
     public $imagePosition = 'center center';
     /**
@@ -56,7 +56,7 @@ class LoadingOverlay extends Widget
     public $minSize = '20px';
     /**
     * @var integer Specifies an interval in milliseconds to resize and reposition the LoadingOverlay according to its container
-    * Integer
+    * + Integer
     */
     public $resizeInterval = 0;
     /**
@@ -81,9 +81,8 @@ class LoadingOverlay extends Widget
     public function init()
     {
         $bundle = LoadingOverlayAsset::register($this->getView());
-        if ($this->image == '') {
-            $this->image = $bundle->baseUrl.'/src/loading.gif';
-        }
+        if ($this->image == '')   $this->image =  $bundle->baseUrl.'/src/loading.gif';
+        if ($this->fontawesome != '') $this->image = '';
         $this->fade =  json_encode($this->fade);
 
 
