@@ -76,6 +76,9 @@ class LoadingOverlay extends Widget
     public $elementOverlay; //Нужна доработка...
 
 
+    public $test; //Удалить...
+
+
   
 
     public function init()
@@ -84,6 +87,9 @@ class LoadingOverlay extends Widget
         if ($this->image == '')   $this->image =  $bundle->baseUrl.'/src/loading.gif';
         if ($this->fontawesome != '') $this->image = '';
         $this->fade =  json_encode($this->fade);
+
+//Вот так, буду обрабатывать "разнотипные" переменные
+if (gettype($this->test) == 'string' ) $this->test = '"'.$this->test.'"'; //Удалить...
 
 
 
@@ -110,6 +116,9 @@ class LoadingOverlay extends Widget
          size            : "{$this->size}",
          zIndex          :  {$this->zIndex}
          });
+
+         //alert(typeof {$this->test}); //Удалить...
+
 JS;
         Yii::$app->view->registerJs($script);
     }
