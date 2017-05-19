@@ -33,3 +33,5 @@ echo LoadingOverlay::widget([
 ```
 
 Свойство "fontawesome" работает, если к проекту подключен Font Awesome. Например - https://github.com/rmrevin/yii2-fontawesome
+
+Добавил класс PjaxLoadingOverlay, который расширяет стандартный Pjax

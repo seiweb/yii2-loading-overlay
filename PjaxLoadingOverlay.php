@@ -7,23 +7,14 @@
 namespace timurmelnikov\widgets;
 
 use Yii;
-use yii\base\Widget;
+use yii\widgets\Pjax;
 
 /**
  * @author Timur Melnikov <melnilovt@gmail.com>
  */
-class LoadingOverlay extends Widget
+class PjaxLoadingOverlay extends Pjax
 {
-    
-    /*
-    * Режим Pjax
-    */
-    const MODE_PJAX = 'modePjax';
-    /*
-    * Режим подключения jQuery LoadingOverlay
-    */
-    const MODE_REGISTER_BUNDLE = 'modeRegisterBundle';
-
+ 
     /**
     * @var string Свойство CSS background-color в формате rgba()
     */
@@ -69,6 +60,9 @@ class LoadingOverlay extends Widget
 
     public function init()
     {
+
+        parent::init();
+
         $bundle = LoadingOverlayAsset::register($this->getView());
         if ($this->image == '') {
             $this->image =  $bundle->baseUrl.'/src/loading.gif';
@@ -78,7 +72,7 @@ class LoadingOverlay extends Widget
         }
         $this->fade =  json_encode($this->fade);
 
-//Вот так, буду обрабатывать "разнотипные" переменные
+        //Обработка разнотипных переменных
         if (gettype($this->maxSize) == 'string') {
             $this->maxSize = '"'.$this->maxSize.'"';
         }
@@ -89,10 +83,12 @@ class LoadingOverlay extends Widget
             $this->size = '"'.$this->size.'"';
         }
 
-
+       $this->elementOverlay = $this->id;
 
         $this->setDefaults();
         $this->registerLoader();
+
+        echo $this->id;
     }
 
 /**
@@ -122,32 +118,16 @@ JS;
     private function registerLoader() //Нужна доработка...
     {
 
-//Перехват любого AJAX запроса...
-//         $script = <<<JS
-// $(document).ajaxSend(function(event, jqxhr, settings){
-//     $("{$this->elementOverlay}").LoadingOverlay("show");
-// });
-// $(document).ajaxComplete(function(event, jqxhr, settings){
-//     $("{$this->elementOverlay}").LoadingOverlay("hide");
-// });
-// JS;
-
-
 // Перехват Pjax...
         $script = <<< JS
-var elementOverlay = "{$this->elementOverlay}";        
-$(document).on('pjax:send', function() {
-    if (elementOverlay != "") {
-        $("{$this->elementOverlay}").LoadingOverlay("show"); //На элемент
-    } else {
-        $.LoadingOverlay("show"); //На всю страницу
+$(document).on('pjax:send', function(event) {
+    if ("{$this->elementOverlay}" === event.target.id) {
+        $("#"+"{$this->elementOverlay}").LoadingOverlay("show"); //На элемент
     }
 })
-$(document).on('pjax:complete', function() {
-    if (elementOverlay != "") {
-        $("{$this->elementOverlay}").LoadingOverlay("hide", true); //На элемент
-    } else {
-        $.LoadingOverlay("hide"); //На всю страницу
+$(document).on('pjax:complete', function(event) {
+    if ("{$this->elementOverlay}" === event.target.id) {
+        $("#"+"{$this->elementOverlay}").LoadingOverlay("hide", true); //На элемент
     }
 })
 JS;

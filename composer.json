@@ -4,6 +4,7 @@
     "keywords": [
         "yii2",
         "ajax",
+        "pjax",
         "widget",
         "jQuery",
 		"LoadingOverlay"
