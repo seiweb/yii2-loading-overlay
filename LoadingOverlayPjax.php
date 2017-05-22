@@ -7,23 +7,14 @@
 namespace timurmelnikov\widgets;
 
 use Yii;
-use yii\base\Widget;
+use yii\widgets\Pjax;
 
 /**
  * @author Timur Melnikov <melnilovt@gmail.com>
  */
-class LoadingOverlay extends Widget
+class LoadingOverlayPjax extends Pjax
 {
-    
-    /*
-    * Режим Pjax
-    */
-    const MODE_PJAX = 'modePjax';
-    /*
-    * Режим подключения jQuery LoadingOverlay
-    */
-    const MODE_REGISTER_BUNDLE = 'modeRegisterBundle';
-
+ 
     /**
     * @var string Свойство CSS background-color в формате rgba()
     */
@@ -63,12 +54,20 @@ class LoadingOverlay extends Widget
     public $zIndex = 9999;
     /**
     * @var string
-    * Он-же Идентификатор экземпляра...
+    * Альтернативный DOM элемент наложения LoadingOverlay
     */
-    public $elementOverlay; //Нужна доработка...
+    public $elementOverlay = '';
+    /**
+    * @var string
+    * ID JavaScript экземпляра PjaxLoadingOverlay
+    */
+    public $idJS;
 
     public function init()
     {
+
+        parent::init();
+
         $bundle = LoadingOverlayAsset::register($this->getView());
         if ($this->image == '') {
             $this->image =  $bundle->baseUrl.'/src/loading.gif';
@@ -78,7 +77,7 @@ class LoadingOverlay extends Widget
         }
         $this->fade =  json_encode($this->fade);
 
-//Вот так, буду обрабатывать "разнотипные" переменные
+        //Обработка разнотипных переменных
         if (gettype($this->maxSize) == 'string') {
             $this->maxSize = '"'.$this->maxSize.'"';
         }
@@ -89,8 +88,7 @@ class LoadingOverlay extends Widget
             $this->size = '"'.$this->size.'"';
         }
 
-
-
+        $this->idJS = $this->id;
         $this->setDefaults();
         $this->registerLoader();
     }
@@ -101,56 +99,48 @@ class LoadingOverlay extends Widget
     private function setDefaults() //Нужна доработка...
     {
         $script = <<<JS
-  $.LoadingOverlaySetup({
-     color           : "{$this->color}",
-     fade            :  {$this->fade},
-     fontawesome     : "{$this->fontawesome}",
-     image           : "{$this->image}",
-     imagePosition   : "{$this->imagePosition}",
-     maxSize         :  {$this->maxSize},
-     minSize         :  {$this->minSize},
-     size            :  {$this->size},
-     zIndex          :  {$this->zIndex}
-  });
+    $.LoadingOverlaySetup({
+        color           : "{$this->color}",
+        fade            :  {$this->fade},
+        fontawesome     : "{$this->fontawesome}",
+        image           : "{$this->image}",
+        imagePosition   : "{$this->imagePosition}",
+        maxSize         :  {$this->maxSize},
+        minSize         :  {$this->minSize},
+        size            :  {$this->size},
+        zIndex          :  {$this->zIndex}
+    });
 JS;
         Yii::$app->view->registerJs($script);
     }
 
 /**
- * Метод регистрации скрипта лоадера в представлении
+ * Метод регистрации скрипта jQuery LoadingOverlay в представлении
  */
     private function registerLoader() //Нужна доработка...
     {
 
-//Перехват любого AJAX запроса...
-//         $script = <<<JS
-// $(document).ajaxSend(function(event, jqxhr, settings){
-//     $("{$this->elementOverlay}").LoadingOverlay("show");
-// });
-// $(document).ajaxComplete(function(event, jqxhr, settings){
-//     $("{$this->elementOverlay}").LoadingOverlay("hide");
-// });
-// JS;
 
-
-// Перехват Pjax...
         $script = <<< JS
-var elementOverlay = "{$this->elementOverlay}";        
-$(document).on('pjax:send', function() {
-    if (elementOverlay != "") {
-        $("{$this->elementOverlay}").LoadingOverlay("show"); //На элемент
-    } else {
-        $.LoadingOverlay("show"); //На всю страницу
-    }
-})
-$(document).on('pjax:complete', function() {
-    if (elementOverlay != "") {
-        $("{$this->elementOverlay}").LoadingOverlay("hide", true); //На элемент
-    } else {
-        $.LoadingOverlay("hide"); //На всю страницу
-    }
-})
+    $(document).on('pjax:send', function(event) {
+        if ("{$this->idJS}" === event.target.id) {
+            if ("{$this->elementOverlay}" === "") {
+                $("#"+"{$this->idJS}").LoadingOverlay("show");
+            } else {
+                $("$this->elementOverlay").LoadingOverlay("show");
+            }
+        }
+    })
+    $(document).on('pjax:complete', function(event) {
+        if ("{$this->idJS}" === event.target.id) {
+            if ("{$this->elementOverlay}" === "") {
+                $("#"+"{$this->idJS}").LoadingOverlay("hide");
+            } else {
+                $("$this->elementOverlay").LoadingOverlay("hide");
+            }
+        }
+    })
 JS;
-        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->elementOverlay);
+        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->idJS);
     }
 }
