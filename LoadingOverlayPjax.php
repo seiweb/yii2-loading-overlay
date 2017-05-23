@@ -57,15 +57,15 @@ class LoadingOverlayPjax extends Pjax
     * Альтернативный DOM элемент наложения LoadingOverlay
     */
     public $elementOverlay = '';
+    
     /**
     * @var string
     * ID JavaScript экземпляра PjaxLoadingOverlay
     */
-    public $idJS;
+    private $idJS;
 
     public function init()
     {
-
         parent::init();
 
         $bundle = LoadingOverlayAsset::register($this->getView());
@@ -77,7 +77,6 @@ class LoadingOverlayPjax extends Pjax
         }
         $this->fade =  json_encode($this->fade);
 
-        //Обработка разнотипных переменных
         if (gettype($this->maxSize) == 'string') {
             $this->maxSize = '"'.$this->maxSize.'"';
         }
@@ -89,48 +88,39 @@ class LoadingOverlayPjax extends Pjax
         }
 
         $this->idJS = $this->id;
-        $this->setDefaults();
         $this->registerLoader();
     }
 
 /**
- * Метод сборки скрипта установки начальных настроек лоадера и регистрация его в представлении
- */
-    private function setDefaults() //Нужна доработка...
-    {
-        $script = <<<JS
-    $.LoadingOverlaySetup({
-        color           : "{$this->color}",
-        fade            :  {$this->fade},
-        fontawesome     : "{$this->fontawesome}",
-        image           : "{$this->image}",
-        imagePosition   : "{$this->imagePosition}",
-        maxSize         :  {$this->maxSize},
-        minSize         :  {$this->minSize},
-        size            :  {$this->size},
-        zIndex          :  {$this->zIndex}
-    });
-JS;
-        Yii::$app->view->registerJs($script);
-    }
-
-/**
- * Метод регистрации скрипта jQuery LoadingOverlay в представлении
+ * Метод регистрации экземпляров скрипта jQuery LoadingOverlay в представлении
  */
     private function registerLoader() //Нужна доработка...
     {
-
-
         $script = <<< JS
     $(document).on('pjax:send', function(event) {
-        if ("{$this->idJS}" === event.target.id) {
-            if ("{$this->elementOverlay}" === "") {
-                $("#"+"{$this->idJS}").LoadingOverlay("show");
+
+        setup =  new Object();
+        setup["{$this->idJS}"] = {
+            color           : "{$this->color}",
+            fade            :  {$this->fade},
+            fontawesome     : "{$this->fontawesome}",
+            image           : "{$this->image}",
+            imagePosition   : "{$this->imagePosition}",
+            maxSize         :  {$this->maxSize},
+            minSize         :  {$this->minSize},
+            size            :  {$this->size},
+            zIndex          :  {$this->zIndex}
+        };
+
+    if ("{$this->idJS}" === event.target.id) {
+        if ("{$this->elementOverlay}" === "") {
+                $("#"+"{$this->idJS}").LoadingOverlay("show", setup[event.target.id]);
             } else {
-                $("$this->elementOverlay").LoadingOverlay("show");
+                $("$this->elementOverlay").LoadingOverlay("show", setup[event.target.id]);
             }
         }
     })
+
     $(document).on('pjax:complete', function(event) {
         if ("{$this->idJS}" === event.target.id) {
             if ("{$this->elementOverlay}" === "") {
