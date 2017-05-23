@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @link https://github.com/timurmelnikov/yii2-loading-overlay
  * @copyright Copyright (c) 2017 Timur Melnikov
@@ -11,7 +10,7 @@ namespace timurmelnikov\widgets;
 use yii\web\AssetBundle;
 
 /**
- * @author Timur Melnikov <melnilovt@gmail.com>
+ * Класс подключения скрипта jQuery LoadingOverlay
  */
 class LoadingOverlayAsset extends AssetBundle
 {

@@ -4,13 +4,15 @@
  * @copyright Copyright (c) 2017 Timur Melnikov
  * @license MIT
  */
+
 namespace timurmelnikov\widgets;
 
 use Yii;
 use yii\widgets\Pjax;
+use yii\web\View;
 
 /**
- * @author Timur Melnikov <melnilovt@gmail.com>
+ * Расширение стандартного класса Yii2 Pjax для использования jQuery LoadingOverlay
  */
 class LoadingOverlayPjax extends Pjax
 {
@@ -132,6 +134,6 @@ class LoadingOverlayPjax extends Pjax
         }
     })
 JS;
-        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->_idJS);
+        Yii::$app->view->registerJs($script, View::POS_READY, $this->_idJS);
     }
 }
