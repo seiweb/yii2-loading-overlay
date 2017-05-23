@@ -60,9 +60,10 @@ class LoadingOverlayPjax extends Pjax
     
     /**
     * @var string
-    * ID JavaScript экземпляра PjaxLoadingOverlay
+    * Локальный ID JavaScript экземпляра PjaxLoadingOverlay
     */
-    private $idJS;
+    private $_idJS;
+
 
     public function init()
     {
@@ -87,7 +88,7 @@ class LoadingOverlayPjax extends Pjax
             $this->size = '"'.$this->size.'"';
         }
 
-        $this->idJS = $this->id;
+        $this->_idJS = $this->id;
         $this->registerLoader();
     }
 
@@ -100,7 +101,7 @@ class LoadingOverlayPjax extends Pjax
     $(document).on('pjax:send', function(event) {
 
         setup =  new Object();
-        setup["{$this->idJS}"] = {
+        setup["{$this->_idJS}"] = {
             color           : "{$this->color}",
             fade            :  {$this->fade},
             fontawesome     : "{$this->fontawesome}",
@@ -112,9 +113,9 @@ class LoadingOverlayPjax extends Pjax
             zIndex          :  {$this->zIndex}
         };
 
-    if ("{$this->idJS}" === event.target.id) {
+    if ("{$this->_idJS}" === event.target.id) {
         if ("{$this->elementOverlay}" === "") {
-                $("#"+"{$this->idJS}").LoadingOverlay("show", setup[event.target.id]);
+                $("#"+"{$this->_idJS}").LoadingOverlay("show", setup[event.target.id]);
             } else {
                 $("$this->elementOverlay").LoadingOverlay("show", setup[event.target.id]);
             }
@@ -122,15 +123,15 @@ class LoadingOverlayPjax extends Pjax
     })
 
     $(document).on('pjax:complete', function(event) {
-        if ("{$this->idJS}" === event.target.id) {
+        if ("{$this->_idJS}" === event.target.id) {
             if ("{$this->elementOverlay}" === "") {
-                $("#"+"{$this->idJS}").LoadingOverlay("hide");
+                $("#"+"{$this->_idJS}").LoadingOverlay("hide");
             } else {
                 $("$this->elementOverlay").LoadingOverlay("hide");
             }
         }
     })
 JS;
-        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->idJS);
+        Yii::$app->view->registerJs($script, yii\web\View::POS_READY, $this->_idJS);
     }
 }
