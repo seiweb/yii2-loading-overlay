@@ -92,9 +92,9 @@ class LoadingOverlayPjax extends Pjax
         $this->registerLoader();
     }
 
-/**
- * Метод регистрации экземпляров скрипта jQuery LoadingOverlay в представлении
- */
+    /**
+    * Метод регистрации экземпляров скрипта jQuery LoadingOverlay в представлении
+    */
     private function registerLoader() //Нужна доработка...
     {
         $script = <<< JS
