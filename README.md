@@ -105,4 +105,14 @@ use timurmelnikov\widgets\LoadingOverlayPjax;
 <?php LoadingOverlayPjax::end(); ?>
 ```
 
-Свойство "fontawesome" работает, если к проекту подключен Font Awesome. Например - https://github.com/rmrevin/yii2-fontawesome
+### Перечень всех настроек
+"color"          - Свойство CSS background-color в формате rgba()
+"fade"           - Управление появлением / затуханием
+"fontawesome"    - Классы иконок Font Awesome (работает, если к проекту подключен Font Awesome. Например - https://github.com/rmrevin/yii2-fontawesome)
+"image"          - URL картинки
+"imagePosition"  - Свойство CSS background-position, для настройки расположения изображения
+"maxSize"        - Максимальный размер в пикселях
+"minSize"        - Минимальный размер в пикселях
+"size"           - Размер изображения в процентах
+"zIndex"         - Свойство CSS z-index
+"elementOverlay" - Альтернативный DOM элемент наложения LoadingOverlay
