@@ -19,6 +19,10 @@ class LoadingOverlayAsset extends AssetBundle
         'yii\web\JqueryAsset',
     ];
 
+
+    /**
+    * Метод инициализации
+    */
     public function init()
     {
         parent::init();

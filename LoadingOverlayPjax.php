@@ -23,7 +23,6 @@ class LoadingOverlayPjax extends Pjax
     public $color = 'rgba(255, 255, 255, 0.8)';
     /**
     * @var array Управление появлением / затуханием
-    * Boolean/Integer/String/Array
     */
     public $fade = [];
     /**
@@ -55,31 +54,33 @@ class LoadingOverlayPjax extends Pjax
     */
     public $zIndex = 9999;
     /**
-    * @var string
-    * Альтернативный DOM элемент наложения LoadingOverlay
+    * @var string Альтернативный DOM элемент наложения jQuery LoadingOverlay
     */
     public $elementOverlay = '';
-    
+
+
     /**
-    * @var string
-    * Локальный ID JavaScript экземпляра PjaxLoadingOverlay
+    * Метод инициализации
     */
-    private $_idJS;
-
-
     public function init()
     {
         parent::init();
+        $this->convertFormats();
+        $this->registerLoaderOverlay();
+    }
 
-        $bundle = LoadingOverlayAsset::register($this->getView());
+    /**
+    * Метод преобразования форматов переменных для заполнения настроек
+    */
+    private function convertFormats()
+    {
         if ($this->image == '') {
-            $this->image =  $bundle->baseUrl.'/src/loading.gif';
+            $this->image = LoadingOverlayAsset::register($this->getView())->baseUrl.'/src/loading.gif';
         }
         if ($this->fontawesome != '') {
             $this->image = '';
         }
         $this->fade =  json_encode($this->fade);
-
         if (gettype($this->maxSize) == 'string') {
             $this->maxSize = '"'.$this->maxSize.'"';
         }
@@ -89,35 +90,33 @@ class LoadingOverlayPjax extends Pjax
         if (gettype($this->size) == 'string') {
             $this->size = '"'.$this->size.'"';
         }
-
-        $this->_idJS = $this->id;
-        $this->registerLoader();
     }
 
     /**
     * Метод регистрации экземпляров скрипта jQuery LoadingOverlay в представлении
     */
-    private function registerLoader() //Нужна доработка...
+    private function registerLoaderOverlay()
     {
         $script = <<< JS
+
     $(document).on('pjax:send', function(event) {
 
         setup =  new Object();
-        setup["{$this->_idJS}"] = {
-            color           : "{$this->color}",
-            fade            :  {$this->fade},
-            fontawesome     : "{$this->fontawesome}",
-            image           : "{$this->image}",
-            imagePosition   : "{$this->imagePosition}",
-            maxSize         :  {$this->maxSize},
-            minSize         :  {$this->minSize},
-            size            :  {$this->size},
-            zIndex          :  {$this->zIndex}
+        setup["$this->id"] = {
+            color           : "$this->color",
+            fade            :  $this->fade,
+            fontawesome     : "$this->fontawesome",
+            image           : "$this->image",
+            imagePosition   : "$this->imagePosition",
+            maxSize         :  $this->maxSize,
+            minSize         :  $this->minSize,
+            size            :  $this->size,
+            zIndex          :  $this->zIndex
         };
 
-    if ("{$this->_idJS}" === event.target.id) {
-        if ("{$this->elementOverlay}" === "") {
-                $("#"+"{$this->_idJS}").LoadingOverlay("show", setup[event.target.id]);
+    if ("$this->id" === event.target.id) {
+        if ("$this->elementOverlay" === "") {
+                $("#"+"$this->id").LoadingOverlay("show", setup[event.target.id]);
             } else {
                 $("$this->elementOverlay").LoadingOverlay("show", setup[event.target.id]);
             }
@@ -125,15 +124,16 @@ class LoadingOverlayPjax extends Pjax
     })
 
     $(document).on('pjax:complete', function(event) {
-        if ("{$this->_idJS}" === event.target.id) {
-            if ("{$this->elementOverlay}" === "") {
-                $("#"+"{$this->_idJS}").LoadingOverlay("hide");
+        if ("$this->id" === event.target.id) {
+            if ("$this->elementOverlay" === "") {
+                $("#"+"$this->id").LoadingOverlay("hide");
             } else {
                 $("$this->elementOverlay").LoadingOverlay("hide");
             }
         }
     })
+
 JS;
-        Yii::$app->view->registerJs($script, View::POS_READY, $this->_idJS);
+        Yii::$app->view->registerJs($script, View::POS_READY, $this->id);
     }
 }

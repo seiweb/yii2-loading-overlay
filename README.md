@@ -1,9 +1,10 @@
 yii2-loading-overlay
 ================
-Yii2 виджет-обертка для подключения плагина jQuery LoadingOverlay  
+Yii2 виджет-обертка для использования плагина [jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/)  
 Виджет предназначен для наложения картинки-лоадера на блок, при обработке Ajax запроса.
 
 ## Демонстрация работы
+
 [Demo страничка jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/)
 
 ## Установка
@@ -68,7 +69,9 @@ $this->registerJs($script, yii\web\View::POS_READY);
 ?>
 ```  
 
-### 2-й - способ - Pjax
+### 2-й - работа с Pjax
+
+Класс LoadingOverlayPjax, является расширением стандартного yii\widgets\Pjax и наследует все его поведение.
 
 В представлении, где будет использоваться Pjax, подключить:
 ``` php
@@ -86,7 +89,6 @@ use timurmelnikov\widgets\LoadingOverlayPjax;
 
             'id',
             'name',
-            'phone',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
@@ -100,19 +102,23 @@ use timurmelnikov\widgets\LoadingOverlayPjax;
 ``` php
 <?php LoadingOverlayPjax::begin([
     'color'=> 'rgba(255, 255, 44, 0.8)', //Настраиваем цвет
+    'elementOverlay' => '#element'       //Картинка лоадера, наложится на DOM элемент с id="element"
 ]); ?>
 ...
 <?php LoadingOverlayPjax::end(); ?>
 ```
 
-### Перечень всех настроек
+### Перечень возможных настроек
+
 - "color"          - Свойство CSS background-color в формате rgba()
 - "fade"           - Управление появлением / затуханием
-- "fontawesome"    - Классы иконок Font Awesome (работает, если к проекту подключен Font Awesome. Например - https://github.com/rmrevin/yii2-fontawesome)
+- "fontawesome"    - Классы иконок Font Awesome (необходим Font Awesome, например - https://github.com/rmrevin/yii2-fontawesome)
 - "image"          - URL картинки
 - "imagePosition"  - Свойство CSS background-position, для настройки расположения изображения
 - "maxSize"        - Максимальный размер в пикселях
 - "minSize"        - Минимальный размер в пикселях
 - "size"           - Размер изображения в процентах
 - "zIndex"         - Свойство CSS z-index
-- "elementOverlay" - Альтернативный DOM элемент наложения LoadingOverlay
+- "elementOverlay" - Альтернативный DOM элемент наложения jQuery LoadingOverlay
+
+Примечание: Свойство "fontawesome" , имеет более высокий преоритет, чем свойство "image". Если установлены 2 настройки "image" и "fontawesome", "image" - игнорируется, "fontawesome" - отображается.
