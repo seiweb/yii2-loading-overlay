@@ -67,7 +67,7 @@ JS;
 $this->registerJs($script, yii\web\View::POS_READY);
 
 ?>
-```  
+```
 
 ### 2-й - работа с Pjax
 
@@ -86,10 +86,8 @@ use timurmelnikov\widgets\LoadingOverlayPjax;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'name',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
@@ -108,17 +106,19 @@ use timurmelnikov\widgets\LoadingOverlayPjax;
 <?php LoadingOverlayPjax::end(); ?>
 ```
 
-### Перечень возможных настроек
+### Перечень настроек (свойств)
 
-- "color"          - Свойство CSS background-color в формате rgba()
-- "fade"           - Управление появлением / затуханием
-- "fontawesome"    - Классы иконок Font Awesome (необходим Font Awesome, например - https://github.com/rmrevin/yii2-fontawesome)
-- "image"          - URL картинки
-- "imagePosition"  - Свойство CSS background-position, для настройки расположения изображения
-- "maxSize"        - Максимальный размер в пикселях
-- "minSize"        - Минимальный размер в пикселях
-- "size"           - Размер изображения в процентах
-- "zIndex"         - Свойство CSS z-index
-- "elementOverlay" - Альтернативный DOM элемент наложения jQuery LoadingOverlay
+Свойство | Описание
+------------ | -------------
+color | Свойство CSS background-color в формате rgba()
+fade | Управление появлением / затуханием
+fontawesome | Классы иконок Font Awesome (необходим Font Awesome, например - https://github.com/rmrevin/yii2-fontawesome)
+image | URL картинки
+imagePosition" | Свойство CSS background-position, для настройки расположения изображения
+maxSize | Максимальный размер в пикселях
+minSize | Минимальный размер в пикселях
+size | Размер изображения в процентах
+zIndex | Свойство CSS z-index
+elementOverlay | Альтернативный DOM элемент наложения jQuery LoadingOverlay
 
 Примечание: Свойство "fontawesome" , имеет более высокий преоритет, чем свойство "image". Если установлены 2 настройки "image" и "fontawesome", "image" - игнорируется, "fontawesome" - отображается.

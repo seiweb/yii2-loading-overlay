@@ -60,11 +60,11 @@ class LoadingOverlayPjax extends Pjax
 
 
     /**
-    * Метод инициализации
+    * Метод вызова виджета
     */
-    public function init()
+    public function run()
     {
-        parent::init();
+        parent::run();
         $this->convertFormats();
         $this->registerLoaderOverlay();
     }
