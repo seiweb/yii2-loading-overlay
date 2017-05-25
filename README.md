@@ -1,13 +1,12 @@
-Yii2 виджет-обертка для использования плагина [jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/) 
+Yii2 виджет-обертка для [jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/) 
 ================
-
-Виджет предназначен для наложения картинки-лоадера на блок, при обработке Ajax запроса.
-
 
 [![Latest Stable Version](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/v/stable)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
 [![Latest Unstable Version](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/v/unstable)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
 [![Total Downloads](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/downloads)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
 [![License](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/license)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
+
+Виджет предназначен для наложения картинки-лоадера на блок, при обработке Ajax запроса.
 
 ## Скриншоты
 
