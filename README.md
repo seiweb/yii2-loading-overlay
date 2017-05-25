@@ -78,7 +78,7 @@ $this->registerJs($script, yii\web\View::POS_READY);
 use timurmelnikov\widgets\LoadingOverlayPjax;
 ```
 
-Использовать, вместо стандартного Pjax, "оборачивая" в него, папример GridView:
+Использовать, вместо стандартного Pjax, "оборачивая" в него, например GridView:
 ``` php
 <?php LoadingOverlayPjax::begin(); ?>
     <?= GridView::widget([

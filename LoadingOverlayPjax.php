@@ -137,10 +137,8 @@ class LoadingOverlayPjax extends Pjax
 JS;
         } else {
             $script = <<< JS
-
-    $(document).on('pjax:send', function(event) { setup = new Object(); setup["$this->id"] = { color : "$this->color", fade : $this->fade, fontawesome : "$this->fontawesome", image : "$this->image", imagePosition : "$this->imagePosition", maxSize : $this->maxSize, minSize : $this->minSize, size : $this->size, zIndex : $this->zIndex }; if ("$this->id" === event.target.id) { if ("$this->elementOverlay" === "") { $("#"+"$this->id").LoadingOverlay("show", setup[event.target.id]); } else { $("$this->elementOverlay").LoadingOverlay("show", setup[event.target.id]); } } })
-    $(document).on('pjax:complete', function(event) { if ("$this->id" === event.target.id) { if ("$this->elementOverlay" === "") { $("#"+"$this->id").LoadingOverlay("hide"); } else { $("$this->elementOverlay").LoadingOverlay("hide"); } } })
-
+$(document).on('pjax:send', function(event) { setup = new Object(); setup["$this->id"] = { color : "$this->color", fade : $this->fade, fontawesome : "$this->fontawesome", image : "$this->image", imagePosition : "$this->imagePosition", maxSize : $this->maxSize, minSize : $this->minSize, size : $this->size, zIndex : $this->zIndex }; if ("$this->id" === event.target.id) { if ("$this->elementOverlay" === "") { $("#"+"$this->id").LoadingOverlay("show", setup[event.target.id]); } else { $("$this->elementOverlay").LoadingOverlay("show", setup[event.target.id]); } } })
+$(document).on('pjax:complete', function(event) { if ("$this->id" === event.target.id) { if ("$this->elementOverlay" === "") { $("#"+"$this->id").LoadingOverlay("hide"); } else { $("$this->elementOverlay").LoadingOverlay("hide"); } } })
 JS;
         }
         Yii::$app->view->registerJs($script, View::POS_READY, $this->id);
