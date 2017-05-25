@@ -4,8 +4,10 @@ Yii2 виджет-обертка для использования плагин�
 Виджет предназначен для наложения картинки-лоадера на блок, при обработке Ajax запроса.
 
 
-[![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/version)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
-[![Latest Unstable Version](https://poser.pugx.org/phpunit/phpunit/v/unstable)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
+[![Latest Stable Version](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/v/stable)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
+[![Latest Unstable Version](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/v/unstable)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
+[![Total Downloads](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/downloads)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
+[![License](https://poser.pugx.org/timurmelnikov/yii2-loading-overlay/license)](https://packagist.org/packages/timurmelnikov/yii2-loading-overlay)
 
 ## Скриншоты
 
