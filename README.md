@@ -3,6 +3,14 @@ yii2-loading-overlay
 Yii2 виджет-обертка для использования плагина [jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/)  
 Виджет предназначен для наложения картинки-лоадера на блок, при обработке Ajax запроса.
 
+## Скриншоты
+
+1. Pjax с Gridview
+![Pjax с Gridview](https://goo.gl/photos/7WPrq2N6PTvHbs177)
+
+2. Pjax с произвольным блоком
+![Pjax с произвольным блоком](https://goo.gl/photos/FsggqXQktVfrAAjz9)
+
 ## Демонстрация работы
 
 [Demo страничка jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/)
@@ -78,9 +86,12 @@ $this->registerJs($script, yii\web\View::POS_READY);
 use timurmelnikov\widgets\LoadingOverlayPjax;
 ```
 
-Использовать, вместо стандартного Pjax, "оборачивая" в него, например GridView:
+Использовать, вместо стандартного Pjax, "оборачивая" в него, например GridView (Скриншот 1):
 ``` php
-<?php LoadingOverlayPjax::begin(); ?>
+<?php LoadingOverlayPjax::begin([
+'color'=> 'rgba(102, 255, 204, 0.2)',
+'fontawesome' => 'fa fa-spinner fa-spin'
+]); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -88,6 +99,7 @@ use timurmelnikov\widgets\LoadingOverlayPjax;
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             'name',
+            'phone',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
