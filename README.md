@@ -5,11 +5,10 @@ Yii2 виджет-обертка для использования плагин�
 
 ## Скриншоты
 
-1. Pjax с Gridview
-![Pjax с Gridview](https://lh3.googleusercontent.com/56-cBPgQluR8iKO61PfDxorOOwLKQ-hUqYHD_Uuw63LA3QsYByPlJdF393WVq0kVAHqTFh7vUQG0P2LZ7oaKun9J05iYjB6JmtuVgdKONNgIrAN6wheoRbXhJIzt7P2rYjJBcg)
-
-2. Pjax с произвольным блоком
-![Pjax с произвольным блоком](https://lh3.googleusercontent.com/vrVhhcYB0sT-9GxE4Jx78K7XoN6Rh6E442sL190I4Gvv-e00zT4pShSZ4RHwfnePVhOqa-2RW0ePF1OcPXQb6YkhL74KFqzfSatFoJ0GNPBdHHY0wGtQAEsERHtt3QWCX8sqjw)
+Наименование | Скриншот
+------------ | -------------
+Pjax с Gridview | ![Pjax с Gridview](https://lh3.googleusercontent.com/56-cBPgQluR8iKO61PfDxorOOwLKQ-hUqYHD_Uuw63LA3QsYByPlJdF393WVq0kVAHqTFh7vUQG0P2LZ7oaKun9J05iYjB6JmtuVgdKONNgIrAN6wheoRbXhJIzt7P2rYjJBcg)
+Pjax с произвольным блоком | ![Pjax с произвольным блоком](https://lh3.googleusercontent.com/vrVhhcYB0sT-9GxE4Jx78K7XoN6Rh6E442sL190I4Gvv-e00zT4pShSZ4RHwfnePVhOqa-2RW0ePF1OcPXQb6YkhL74KFqzfSatFoJ0GNPBdHHY0wGtQAEsERHtt3QWCX8sqjw)
 
 ## Демонстрация работы
 
