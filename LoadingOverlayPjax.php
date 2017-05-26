@@ -57,9 +57,9 @@ class LoadingOverlayPjax extends Pjax
     * @var string Альтернативный DOM элемент наложения jQuery LoadingOverlay
     */
     public $elementOverlay = '';
-
     
-    private  $bundle = '';
+    private  $_bundle = '';
+
 
     /**
     * Метод вызова виджета
@@ -67,7 +67,7 @@ class LoadingOverlayPjax extends Pjax
     public function run()
     {
         parent::run();
-        $this->bundle=LoadingOverlayAsset::register($this->getView());
+        $this->_bundle=LoadingOverlayAsset::register($this->getView());
         $this->convertFormats();
         $this->registerLoaderOverlay();
     }
@@ -78,7 +78,7 @@ class LoadingOverlayPjax extends Pjax
     private function convertFormats()
     {
         if ($this->image == '') {
-            $this->image = $this->bundle->baseUrl.'/src/loading.gif';
+            $this->image = $this->_bundle->baseUrl.'/src/loading.gif';
         }
         if ($this->fontawesome != '') {
             $this->image = '';

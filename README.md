@@ -40,13 +40,11 @@ php composer.phar require --prefer-dist timurmelnikov/yii2-loading-overlay "~1.0
 
 Есть 2 способа использования:
 
-### 1-й - просто подключаем jQuery LoadingOverlay к представление
+### 1-й - просто подключаем jQuery LoadingOverlay к представлению
 
 В представлении, где будет использоваться yii2-loading-overlay, подключить:
 ``` php
-use timurmelnikov\widgets\LoadingOverlayAsset;
-
-LoadingOverlayAsset::register($this);
+timurmelnikov\widgets\LoadingOverlayAsset::register($this);
 ```
 
 Далее, использовать обычный JavaScript, для отображения/скрытия jQuery LoadingOverlay, руководствуясь  [документацией jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/), например так:
