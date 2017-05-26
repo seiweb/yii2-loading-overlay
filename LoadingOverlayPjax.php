@@ -58,6 +58,8 @@ class LoadingOverlayPjax extends Pjax
     */
     public $elementOverlay = '';
 
+    
+    private  $bundle = '';
 
     /**
     * Метод вызова виджета
@@ -65,6 +67,7 @@ class LoadingOverlayPjax extends Pjax
     public function run()
     {
         parent::run();
+        $this->bundle=LoadingOverlayAsset::register($this->getView());
         $this->convertFormats();
         $this->registerLoaderOverlay();
     }
@@ -75,7 +78,7 @@ class LoadingOverlayPjax extends Pjax
     private function convertFormats()
     {
         if ($this->image == '') {
-            $this->image = LoadingOverlayAsset::register($this->getView())->baseUrl.'/src/loading.gif';
+            $this->image = $this->bundle->baseUrl.'/src/loading.gif';
         }
         if ($this->fontawesome != '') {
             $this->image = '';

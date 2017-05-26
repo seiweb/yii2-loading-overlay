@@ -23,14 +23,14 @@ Pjax с произвольным блоком | ![Pjax с произвольны
 
 Запустить команду
 ``` json
-php composer.phar require --prefer-dist timurmelnikov/yii2-loading-overlay "dev-master"
+php composer.phar require --prefer-dist timurmelnikov/yii2-loading-overlay "~1.0.0"
 ```
 
 Добавить в секцию "require" файла composer.json:
 ``` json
 {
     "require": {
-        "timurmelnikov/yii2-loading-overlay": "dev-master"
+        "timurmelnikov/yii2-loading-overlay": "~1.0.0"
     }
 }
 ```
@@ -45,6 +45,8 @@ php composer.phar require --prefer-dist timurmelnikov/yii2-loading-overlay "dev-
 В представлении, где будет использоваться yii2-loading-overlay, подключить:
 ``` php
 use timurmelnikov\widgets\LoadingOverlayAsset;
+
+LoadingOverlayAsset::register($this);
 ```
 
 Далее, использовать обычный JavaScript, для отображения/скрытия jQuery LoadingOverlay, руководствуясь  [документацией jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/), например так:
