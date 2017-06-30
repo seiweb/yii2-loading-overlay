@@ -17,7 +17,7 @@
     }],
     "require": {
         "yiisoft/yii2": "*",
-        "bower-asset/gasparesganga-jquery-loading-overlay": "1.5.3"
+        "bower-asset/gasparesganga-jquery-loading-overlay": "*"
     },
     "autoload": {
         "psr-4": {
