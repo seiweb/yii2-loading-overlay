@@ -14,7 +14,7 @@ use yii\web\AssetBundle;
  */
 class LoadingOverlayAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/bower/gasparesganga-jquery-loading-overlay';
+    public $sourcePath = '@bower/gasparesganga-jquery-loading-overlay';
     public $depends = [
         'yii\web\JqueryAsset',
     ];
