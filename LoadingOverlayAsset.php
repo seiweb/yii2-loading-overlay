@@ -2,7 +2,7 @@
 /**
  * @link https://github.com/timurmelnikov/yii2-loading-overlay
  * @copyright Copyright (c) 2017 Timur Melnikov
- * @license MIT
+ * @license MITh
  */
 
 namespace timurmelnikov\widgets;
